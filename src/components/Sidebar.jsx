@@ -7,7 +7,7 @@ const Sidebar = ({ isSidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   
   const menuItems = [
-    { icon: Home, label: 'Dashboard', href: '/dashboard' },
+    { icon: Home, label: 'Dashboard', href: '/' },
     { icon: Users, label: 'Students', href: '/students' },
     { icon: Calendar, label: 'Attendance', href: '/attendance' },
     { icon: CreditCard, label: 'Payments', href: '/payments' },
