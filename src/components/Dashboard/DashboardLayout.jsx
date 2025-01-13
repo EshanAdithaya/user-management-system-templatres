@@ -1,91 +1,19 @@
+// src/components/DashboardLayout.jsx
 import React, { useState } from 'react';
-import { Menu, X, Home, Users, Calendar, CreditCard, Bell, Settings, BookOpen, BarChart } from 'lucide-react';
+import { Users, CreditCard, Calendar } from 'lucide-react';
+import Sidebar from '../Sidebar';
+import TopBar from '../TopBar';
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const menuItems = [
-    { icon: Home, label: 'Dashboard', href: '#' },
-    { icon: Users, label: 'Students', href: '#' },
-    { icon: Calendar, label: 'Attendance', href: '#' },
-    { icon: CreditCard, label: 'Payments', href: '#' },
-    { icon: BookOpen, label: 'Courses', href: '#' },
-    { icon: BarChart, label: 'Reports', href: '#' },
-    { icon: Settings, label: 'Settings', href: '#' },
-  ];
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Mobile Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-gray-600 bg-opacity-75 z-20 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside className={`
-        fixed top-0 left-0 z-30
-        h-full w-64 bg-white shadow-lg transform transition-transform duration-200 ease-in-out
-        lg:translate-x-0 lg:static lg:h-screen
-        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
-        <div className="flex items-center justify-between h-16 px-4 border-b">
-          <h1 className="text-xl font-bold text-gray-800">Model With Ruki</h1>
-          <button 
-            onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
-          >
-            <X className="h-6 w-6 text-gray-600" />
-          </button>
-        </div>
+    <div className="flex min-h-screen bg-gray-50">
+      <Sidebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
+      
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopBar setSidebarOpen={setSidebarOpen} />
         
-        <nav className="mt-4">
-          <ul className="space-y-1 px-2">
-            {menuItems.map((item) => (
-              <li key={item.label}>
-                <a
-                  href={item.href}
-                  className="flex items-center px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
-                >
-                  <item.icon className="h-5 w-5 mr-3" />
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <div className="lg:pl-64 flex flex-col min-h-screen">
-        {/* Top Navigation */}
-        <header className="bg-white shadow-sm">
-          <div className="flex items-center justify-between h-16 px-4">
-            <button 
-              onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-md hover:bg-gray-100"
-            >
-              <Menu className="h-6 w-6 text-gray-600" />
-            </button>
-
-            <div className="flex items-center space-x-4">
-              <button className="p-2 rounded-full hover:bg-gray-100 relative">
-                <Bell className="h-6 w-6 text-gray-600" />
-                <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
-              </button>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-sm font-medium text-gray-600">AA</span>
-                </div>
-                <span className="text-sm font-medium text-gray-700">Admin</span>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Page Content */}
         <main className="flex-1 p-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {/* Quick Stats Cards */}
